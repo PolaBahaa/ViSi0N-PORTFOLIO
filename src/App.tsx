@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ButtonLink, Caption, CloseButton, Closing, CopyButton, FileCard, TextLink, useLocalState } from './kit';
+import { initialRepos, loadPublicRepos, repoToProject } from './github';
+import brandLogo from './pola-logo.svg';
 import portraitCutout from './photos/pola-portrait.png';
 
 type Lang = 'en' | 'ar';
 type Category = 'platform' | 'app' | 'learning';
 
-type Project = {
+export type Project = {
     id: number;
     name: string;
     year: string;
@@ -19,7 +21,7 @@ type Project = {
     detail: Record<Lang, string>;
 };
 
-const projects: Project[] = [
+const curatedProjects: Project[] = [
     {
         id: 1, name: 'AMAL-Academy', year: '2026', category: 'platform', visibility: 'private', status: 'development',
         stack: ['TypeScript', 'React', 'Vite', 'Supabase'],
@@ -93,12 +95,6 @@ const projects: Project[] = [
 
 const skills = ['TypeScript', 'JavaScript', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'Vite', 'Firebase', 'Supabase', 'Three.js', 'Capacitor', 'Express', 'Git & GitHub'];
 
-const skillUse: Record<string, number[]> = {
-    'TypeScript': [1, 2, 3, 4], 'JavaScript': [5, 6], 'React': [1, 2, 3, 4], 'HTML': [6, 7], 'CSS': [6, 7],
-    'Tailwind CSS': [2, 3, 4], 'Vite': [1, 2, 3, 4], 'Firebase': [2], 'Supabase': [1], 'Three.js': [3],
-    'Capacitor': [5], 'Express': [2], 'Git & GitHub': [1, 2, 3, 4, 5, 6, 7],
-};
-
 type Sticker = { pos: string; kind: 'pill' | 'circle'; tone: 'teal' | 'yellow' | 'orange' | 'pink' | 'green'; tilt: string; delay: string; lines: Record<Lang, string[]>; sub?: Record<Lang, string> };
 
 const stickers: Sticker[] = [
@@ -120,7 +116,7 @@ const STR = {
         introB: 'I build interactive web experiences — from playful games and a real-time 3D museum to full platforms.',
         getInTouch: 'Get in touch',
         heroNote: 'Every control on this page works: try the filters, open a project, tap a skill, or switch the language.',
-        stats: { repos: 'Repositories on GitHub', publicRepos: 'Public projects', showcased: 'Showcased here', tech: 'Technologies in use' },
+        stats: { repos: 'Public repositories', publicRepos: 'Private showcases', showcased: 'Showcased here', tech: 'Technologies in use' },
         projectsLabel: 'Selected work',
         projectsHeading: 'Projects',
         projectsChip: (n: number) => `${n} builds ↗`,
@@ -128,7 +124,7 @@ const STR = {
         filters: { all: 'All', platform: 'Platforms', app: 'Apps & games', learning: 'Learning' },
         details: 'Details',
         inDevelopment: 'In development',
-        privateRepo: 'Private repo',
+        privateRepo: 'Private project showcase',
         builtWith: 'Built with',
         repositories: 'Repositories',
         skillHighlight: (s: string) => `Highlighting projects that use ${s}. Tap the skill again to clear.`,
@@ -152,10 +148,10 @@ const STR = {
         nowChips: ['Courses & chapters', 'Video lessons', 'Enrollments', 'Roles & permissions', 'Automated tests'],
         contactLabel: 'Say hello',
         contactHeading: 'Contact',
-        contactText: 'The verified place to find me and my work is GitHub — every project on this page links back to its source there.',
+        contactText: 'Have an idea in mind? Get in touch, or find more of my work and updates below.',
         copyGithub: 'Copy GitHub link',
         contactGithub: 'GitHub profile',
-        closing: 'Project facts verified from Pola\'s GitHub on 22 Nov 2026.',
+        closing: 'Public repositories sync on page load and hourly while open. Private project showcases are maintained separately.',
     },
     ar: {
         nav: { projects: 'المشاريع', journey: 'الرحلة', skills: 'المهارات', contact: 'تواصل' },
@@ -166,7 +162,7 @@ const STR = {
         introB: 'ببني تجارب ويب تفاعلية — من ألعاب خفيفة ومتحف ثلاثي الأبعاد بيترسم لحظيًا لحد منصات كاملة.',
         getInTouch: 'تواصل معايا',
         heroNote: 'كل زرار في الصفحة دي شغال: جرّب الفلاتر، افتح أي مشروع، دوس على مهارة، أو بدّل اللغة.',
-        stats: { repos: 'مستودع على GitHub', publicRepos: 'مشروع عام', showcased: 'معروض هنا', tech: 'تقنية شغال بيها' },
+        stats: { repos: 'مستودع عام على GitHub', publicRepos: 'عرض لمشروع خاص', showcased: 'معروض هنا', tech: 'تقنية شغال بيها' },
         projectsLabel: 'أعمال مختارة',
         projectsHeading: 'المشاريع',
         projectsChip: (n: number) => `${n} مشاريع ↗`,
@@ -174,7 +170,7 @@ const STR = {
         filters: { all: 'الكل', platform: 'منصات', app: 'تطبيقات وألعاب', learning: 'رحلة التعلم' },
         details: 'التفاصيل',
         inDevelopment: 'تحت التطوير',
-        privateRepo: 'مستودع خاص',
+        privateRepo: 'عرض مشروع خاص',
         builtWith: 'التقنيات المستخدمة',
         repositories: 'المستودعات',
         skillHighlight: (s: string) => `بظهر المشاريع اللي استخدمت ${s}. دوس على المهارة تاني عشان تمسح التحديد.`,
@@ -198,10 +194,10 @@ const STR = {
         nowChips: ['كورسات وفصول', 'فيديوهات تعليمية', 'تسجيل الطلاب', 'الأدوار والصلاحيات', 'اختبارات آلية'],
         contactLabel: 'قول أهلًا',
         contactHeading: 'التواصل',
-        contactText: 'المكان المؤكد للوصول لي ولشغلي هو GitHub — كل مشروع في الصفحة دي موصول بمصدره هناك.',
+        contactText: 'عندك فكرة حابب نتكلم فيها؟ ابعتلي، أو تابع شغلي وآخر أخباري من الروابط دي.',
         copyGithub: 'انسخ لينك GitHub',
         contactGithub: 'حساب GitHub',
-        closing: 'معلومات المشاريع مأخوذة من GitHub بتاع بولا بتاريخ 22 نوفمبر 2026.',
+        closing: 'المستودعات العامة بتتحدث عند فتح الصفحة وكل ساعة وهي مفتوحة. عروض المشاريع الخاصة بتتحدّث بشكل منفصل.',
     },
 };
 
@@ -240,10 +236,31 @@ function SectionChip({ tone, tilt, children }: { tone: 'teal' | 'yellow' | 'oran
 }
 
 export function App() {
-    const [langRaw, setLang, saved] = useLocalState('pola-portfolio.lang.v1', 'en');
+    const [langRaw, setLang, saved] = useLocalState<Lang>('pola-portfolio.lang.v1', 'en');
     const lang: Lang = langRaw === 'ar' ? 'ar' : 'en';
     const t = STR[lang];
     const chooseLang = (v: Lang) => { if (saved.ready) setLang(v); };
+
+    const [repos, setRepos] = useState(initialRepos);
+    const [syncState, setSyncState] = useState<'loading' | 'live' | 'error'>('loading');
+    const [syncVersion, setSyncVersion] = useState(0);
+    useEffect(() => {
+        const controller = new AbortController();
+        setSyncState('loading');
+        loadPublicRepos(controller.signal).then(data => {
+            setRepos(data);
+            setSyncState('live');
+        }).catch(() => { if (!controller.signal.aborted) setSyncState('error'); });
+        return () => controller.abort();
+    }, [syncVersion]);
+    useEffect(() => {
+        const id = window.setInterval(() => setSyncVersion(v => v + 1), 60 * 60 * 1000);
+        return () => window.clearInterval(id);
+    }, []);
+    const projects: Project[] = [
+        ...curatedProjects.filter(project => project.visibility === 'private'),
+        ...repos.map(repo => repoToProject(repo, curatedProjects)),
+    ];
 
     const [filter, setFilter] = useState<'all' | Category>('all');
     const [activeSkill, setActiveSkill] = useState<string | null>(null);
@@ -278,7 +295,7 @@ export function App() {
         }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
         els.forEach(e => io.observe(e));
         return () => io.disconnect();
-    }, [lang, filter, activeSkill]);
+    }, [lang, filter, activeSkill, repos]);
 
     const pickSkill = (s: string) => {
         setActiveSkill(cur => cur === s ? null : s);
@@ -288,13 +305,19 @@ export function App() {
     const visible = projects.filter(p => filter === 'all' || p.category === filter);
     const openProject = openId == null ? undefined : projects.find(p => p.id === openId);
     const githubUrl = 'https://github.com/PolaBahaa';
+    useEffect(() => {
+        if (openId != null && !projects.some(project => project.id === openId)) {
+            dialogRef.current?.close();
+            setOpenId(null);
+        }
+    }, [repos, openId]);
 
     return <div id="pb-top" className="pb-root">
         <FileCard lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
             <div className="pb-hero">
                 <nav className="pb-nav" aria-label="Portfolio sections">
                     <button type="button" className="pb-brand" onClick={() => scrollToId('pb-top')} aria-label="Pola Bahaa — back to top">
-                        <span className="pb-brand-mark" aria-hidden="true">PB</span>
+                        <img className="pb-brand-logo" src={brandLogo} alt="" aria-hidden="true" />
                         <span className="pb-brand-text">Pola Bahaa<span className="pb-brand-role">{t.brandRole}</span></span>
                     </button>
                     <div className="pb-nav-links">
@@ -335,8 +358,8 @@ export function App() {
             </div>
 
             <section className="pb-stats pb-reveal" aria-label="Numbers">
-                <div className="pb-stat"><Counter to={12} /><span className="pb-stat-label">{t.stats.repos}</span></div>
-                <div className="pb-stat"><Counter to={10} /><span className="pb-stat-label">{t.stats.publicRepos}</span></div>
+                <div className="pb-stat"><Counter to={repos.length} /><span className="pb-stat-label">{t.stats.repos}</span></div>
+                <div className="pb-stat"><Counter to={curatedProjects.filter(p => p.visibility === 'private').length} /><span className="pb-stat-label">{t.stats.publicRepos}</span></div>
                 <div className="pb-stat"><Counter to={projects.length} /><span className="pb-stat-label">{t.stats.showcased}</span></div>
                 <div className="pb-stat"><Counter to={skills.length} /><span className="pb-stat-label">{t.stats.tech}</span></div>
             </section>
@@ -347,9 +370,16 @@ export function App() {
                         <p className="pb-label">{t.projectsLabel}</p>
                         <h2 className="pb-heading">{t.projectsHeading}</h2>
                     </div>
-                    <SectionChip tone="yellow" tilt="5deg">{t.projectsChip(projects.length)}</SectionChip>
+                    <SectionChip tone="teal" tilt="5deg">{t.projectsChip(projects.length)}</SectionChip>
                 </div>
                 <p className="pb-intro pb-reveal">{t.projectsIntro}</p>
+                <div className="pb-sync" role="status">
+                    <span className={`pb-sync-dot pb-sync-${syncState}`} aria-hidden="true" />
+                    <span>{lang === 'ar'
+                        ? (syncState === 'live' ? 'متزامن مع مستودعات GitHub العامة' : syncState === 'loading' ? 'جاري تحديث المشاريع من GitHub…' : 'تعذر التحديث. المعروض آخر نسخة متاحة، وقد لا يشمل تغييرات حديثة.')
+                        : (syncState === 'live' ? 'Synced with public GitHub repositories' : syncState === 'loading' ? 'Updating projects from GitHub…' : 'Update unavailable. Showing the last available snapshot, which may be out of date.')}</span>
+                    <button type="button" disabled={syncState === 'loading'} onClick={() => setSyncVersion(v => v + 1)}>{lang === 'ar' ? 'تحديث' : 'Refresh'}</button>
+                </div>
                 <div className="pb-chips pb-reveal" role="group" aria-label="Filter projects">
                     {(['all', 'platform', 'app', 'learning'] as const).map(c =>
                         <button key={c} type="button" className={`pb-chip${filter === c ? ' is-active' : ''}`} aria-pressed={filter === c} onClick={() => setFilter(c)}>{t.filters[c]}</button>
@@ -358,7 +388,7 @@ export function App() {
                 {activeSkill ? <Caption>{t.skillHighlight(activeSkill)}</Caption> : null}
                 <div className="pb-grid">
                     {visible.map((p, i) => {
-                        const used = activeSkill != null && (skillUse[activeSkill] ?? []).includes(p.id);
+                        const used = activeSkill != null && (activeSkill === 'Git & GitHub' || p.stack.includes(activeSkill));
                         const dim = activeSkill != null && !used;
                         return <article key={p.id} className={`pb-card pb-reveal${used ? ' pb-glow' : ''}${dim ? ' pb-dim' : ''}`} data-delay={`${Math.min(i, 5) * 70}ms`}>
                             <div className="pb-card-head">
@@ -425,6 +455,13 @@ export function App() {
                     <p className="pb-label pb-label-onDark">{t.contactLabel}</p>
                     <h2 className="pb-contact-heading">{t.contactHeading}</h2>
                     <p className="pb-contact-text">{t.contactText}</p>
+                    <div className="pb-contact-grid">
+                        <a className="pb-contact-link" href="mailto:pola.bahaa753@gmail.com"><span>{lang === 'ar' ? 'الإيميل' : 'Email'}</span><strong dir="ltr">pola.bahaa753@gmail.com</strong><span aria-hidden="true">↗</span></a>
+                        <a className="pb-contact-link" href="tel:+201284978352"><span>{lang === 'ar' ? 'اتصال' : 'Call'}</span><strong dir="ltr">+20 128 497 8352</strong><span aria-hidden="true">↗</span></a>
+                        <a className="pb-contact-link" href="https://wa.me/201284978352?text=Hi+Pola%21" target="_blank" rel="noopener noreferrer"><span>WhatsApp</span><strong>{lang === 'ar' ? 'ابعتلي رسالة' : 'Send a message'}</strong><span aria-hidden="true">↗</span></a>
+                        <a className="pb-contact-link" href="https://www.linkedin.com/in/pola-bahaa/" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><strong>Pola Bahaa</strong><span aria-hidden="true">↗</span></a>
+                        <a className="pb-contact-link" href="https://www.facebook.com/pola.vision/" target="_blank" rel="noopener noreferrer"><span>Facebook</span><strong>Pola ViSi0N</strong><span aria-hidden="true">↗</span></a>
+                    </div>
                     <div className="pb-contact-actions">
                         <ButtonLink href={githubUrl} variant="primary" pill>{t.contactGithub}</ButtonLink>
                         <CopyButton text={githubUrl} label={t.copyGithub} variant="secondary" />
@@ -432,7 +469,7 @@ export function App() {
                 </div>
             </section>
 
-            <Closing>{t.closing}</Closing>
+            <Closing><img className="pb-footer-logo" src={brandLogo} alt="Pola Bahaa logo" /><span>{t.closing}</span></Closing>
         </FileCard>
 
         <dialog ref={dialogRef} className="pb-dialog" onClose={() => setOpenId(null)} onClick={e => { if (e.target === dialogRef.current) dialogRef.current?.close(); }}>
