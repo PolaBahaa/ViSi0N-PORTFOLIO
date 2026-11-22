@@ -12,27 +12,18 @@ export type Project = {
     name: string;
     year: string;
     category: Category;
-    visibility: 'public' | 'private';
     status?: 'development';
     url?: string;
-    extraLinks?: { label: string; href: string }[];
     stack: string[];
     tagline: Record<Lang, string>;
     detail: Record<Lang, string>;
 };
 
+// Curated presentation for known public repositories. The live grid is driven
+// entirely by the GitHub API; this only enriches matching public repos.
 const curatedProjects: Project[] = [
     {
-        id: 1, name: 'AMAL-Academy', year: '2026', category: 'platform', visibility: 'private', status: 'development',
-        stack: ['TypeScript', 'React', 'Vite', 'Supabase'],
-        tagline: { en: 'A complete courses academy platform — my biggest build so far.', ar: 'منصة أكاديمية كورسات متكاملة — أكبر مشروع اشتغلت عليه لحد دلوقتي.' },
-        detail: {
-            en: 'Courses and chapters, video lessons, student enrollments, roles and permissions — guarded by an automated test suite that covers the core flows. Built with Antigravity and in active development.',
-            ar: 'كورسات وفصول وفيديوهات وتسجيل طلاب وصلاحيات — محمية بمجموعة اختبارات آلية بتغطي الوظائف الأساسية. بتتبني بمساعدة Antigravity ولسه تحت التطوير.',
-        },
-    },
-    {
-        id: 2, name: 'HAMOURY', year: '2026', category: 'app', visibility: 'public', url: 'https://github.com/PolaBahaa/HAMOURY',
+        id: 2, name: 'HAMOURY', year: '2026', category: 'app', url: 'https://github.com/PolaBahaa/HAMOURY',
         stack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Firebase'],
         tagline: { en: 'A fun activities and competitions app built for a church summer trip.', ar: 'تطبيق أنشطة ومسابقات ممتع، معمول لرحلة صيفية للكنيسة.' },
         detail: {
@@ -41,7 +32,7 @@ const curatedProjects: Project[] = [
         },
     },
     {
-        id: 3, name: 'Revelation-Museum', year: '2026', category: 'app', visibility: 'public', url: 'https://github.com/PolaBahaa/Revelation-Museum',
+        id: 3, name: 'Revelation-Museum', year: '2026', category: 'app', url: 'https://github.com/PolaBahaa/Revelation-Museum',
         stack: ['React', 'TypeScript', 'Three.js', 'Tailwind CSS'],
         tagline: { en: 'An interactive 3D museum experience on the web.', ar: 'تجربة متحف تفاعلي ثلاثي الأبعاد على الويب.' },
         detail: {
@@ -50,7 +41,7 @@ const curatedProjects: Project[] = [
         },
     },
     {
-        id: 4, name: 'MMH-Podcast', year: '2026', category: 'app', visibility: 'public', url: 'https://github.com/PolaBahaa/MMH-Podcast',
+        id: 4, name: 'MMH-Podcast', year: '2026', category: 'app', url: 'https://github.com/PolaBahaa/MMH-Podcast',
         stack: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
         tagline: { en: 'A gamified Christian podcast experience made for SPP 2026.', ar: 'تجربة بودكاست مسيحي تفاعلية بأسلوب الألعاب، معمولة لـ SPP 2026.' },
         detail: {
@@ -59,72 +50,46 @@ const curatedProjects: Project[] = [
         },
     },
     {
-        id: 5, name: 'Memory-Blocks-Game', year: '2026', category: 'app', visibility: 'private',
-        stack: ['JavaScript', 'Capacitor', 'Android'],
-        tagline: { en: 'A memory blocks game packaged as a real Android app.', ar: 'لعبة مكعبات ذاكرة متغلفة كتطبيق أندرويد حقيقي.' },
-        detail: {
-            en: 'The classic flip-and-match memory game, wrapped with Capacitor so it installs and runs on Android phones.',
-            ar: 'لعبة الذاكرة الكلاسيكية بتاعة قلب الكروت والمطابقة، متغلفة بـ Capacitor عشان تتثبت وتشتغل على موبايلات أندرويد.',
-        },
-    },
-    {
-        id: 6, name: 'Faar-Counter', year: '2025', category: 'app', visibility: 'public', url: 'https://github.com/PolaBahaa/Faar-Counter',
+        id: 6, name: 'Faar-Counter', year: '2025', category: 'app', url: 'https://github.com/PolaBahaa/Faar-Counter',
         stack: ['HTML', 'CSS', 'JavaScript'],
-        tagline: { en: 'A funny rat-hitting counter game with an Arabic interface.', ar: 'لعبة عداد ضرب الفأر المضحكة — بواجهة عربية.' },
+        tagline: { en: 'A funny rat-hitting counter game with an Arabic interface.', ar: 'لعبة عداد ضرب الفأر المضحكة، بواجهة عربية.' },
         detail: {
             en: 'Plain HTML, CSS and JavaScript with no frameworks. A silly idea turned into a playable little game.',
             ar: 'HTML وCSS وJavaScript بس من غير أي frameworks. فكرة ظريفة اتحولت للعبة صغيرة تتلعب فعلًا.',
         },
     },
-    {
-        id: 7, name: 'ElZero HTML & CSS Templates', year: '2024', category: 'learning', visibility: 'public',
-        stack: ['HTML', 'CSS'],
-        extraLinks: [
-            { label: 'Leon', href: 'https://github.com/PolaBahaa/HTML_CSS_Leon' },
-            { label: 'Kasper', href: 'https://github.com/PolaBahaa/HTML_CSS_Kasper' },
-            { label: 'ViSi0N', href: 'https://github.com/PolaBahaa/HTML_CSS_ViSi0N' },
-            { label: 'Dashboard', href: 'https://github.com/PolaBahaa/HTML_CSS_Dashboard' },
-        ],
-        tagline: { en: 'Four complete website templates built while mastering HTML & CSS.', ar: 'أربع قوالب مواقع كاملة اتبنوا أثناء إتقان HTML وCSS.' },
-        detail: {
-            en: 'Leon, Kasper, ViSi0N and Dashboard — full multi-section page templates from ElZero Web School, plus a set of CSS assignments.',
-            ar: 'Leon وKasper وViSi0N وDashboard — قوالب صفحات كاملة متعددة الأقسام من ElZero Web School، بالإضافة لمجموعة تكليفات CSS.',
-        },
-    },
 ];
 
-const skills = ['TypeScript', 'JavaScript', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'Vite', 'Firebase', 'Supabase', 'Three.js', 'Capacitor', 'Express', 'Git & GitHub'];
+const skills = ['JavaScript', 'TypeScript', 'C#', '.NET', 'React', 'Node.js', 'Express', 'HTML', 'CSS', 'Tailwind CSS', 'Vite', 'Firebase', 'Supabase', 'Three.js', 'Capacitor', 'Git & GitHub'];
 
 type Sticker = { pos: string; kind: 'pill' | 'circle'; tone: 'teal' | 'yellow' | 'orange' | 'pink' | 'green'; tilt: string; delay: string; lines: Record<Lang, string[]>; sub?: Record<Lang, string> };
 
 const stickers: Sticker[] = [
-    { pos: 'pb-pos-1', kind: 'circle', tone: 'teal', tilt: '-7deg', delay: '0.05s', lines: { en: ['FRONT-END'], ar: ['واجهات', 'أمامية'] }, sub: { en: 'UI · CODE · DETAIL', ar: 'كود · تفاصيل · ذوق' } },
+    { pos: 'pb-pos-1', kind: 'circle', tone: 'teal', tilt: '-7deg', delay: '0.05s', lines: { en: ['FULL', 'STACK'], ar: ['فول', 'ستاك'] }, sub: { en: 'JS · C# · WEB', ar: 'JS · C# · WEB' } },
     { pos: 'pb-pos-2', kind: 'pill', tone: 'yellow', tilt: '-6deg', delay: '0.15s', lines: { en: ['REACT ↗', 'TYPESCRIPT'], ar: ['React ↗', 'TypeScript'] } },
     { pos: 'pb-pos-3', kind: 'pill', tone: 'orange', tilt: '5deg', delay: '0.25s', lines: { en: ['M ⟶TION &', 'INTERACTION'], ar: ['حركة ⟶', 'وتفاعل'] } },
     { pos: 'pb-pos-4', kind: 'pill', tone: 'pink', tilt: '6deg', delay: '0.35s', lines: { en: ['RESPONSIVE', 'DESIGN ©'], ar: ['تصميم', 'متجاوب ©'] } },
-    { pos: 'pb-pos-5', kind: 'pill', tone: 'teal', tilt: '-5deg', delay: '0.45s', lines: { en: ['WEB & ANDROID', "✳ '26"], ar: ['ويب وأندرويد', "✳ '26"] } },
+    { pos: 'pb-pos-5', kind: 'pill', tone: 'teal', tilt: '-5deg', delay: '0.45s', lines: { en: ['.NET · NODE', "✳ '26"], ar: ['.NET · Node', "✳ '26"] } },
     { pos: 'pb-pos-6', kind: 'circle', tone: 'green', tilt: '8deg', delay: '0.55s', lines: { en: ['GAME', 'DEV'], ar: ['تطوير', 'ألعاب'] }, sub: { en: '· WEB · 3D ·', ar: '· ويب · 3D ·' } },
 ];
 
 const STR = {
     en: {
         nav: { projects: 'Projects', journey: 'Journey', skills: 'Skills', contact: 'Contact' },
-        brandRole: 'Front-end developer',
-        eyebrow: 'Interactive portfolio · 2026',
-        roles: ['Front-end developer', 'React & TypeScript builder', 'Game developer', 'Design-driven coder'],
-        introA: 'I\'m currently building AMAL-Academy, a complete courses academy platform, with React, TypeScript and Supabase.',
-        introB: 'I build interactive web experiences — from playful games and a real-time 3D museum to full platforms.',
-        getInTouch: 'Get in touch',
-        heroNote: 'Every control on this page works: try the filters, open a project, tap a skill, or switch the language.',
-        stats: { repos: 'Public repositories', publicRepos: 'Private showcases', showcased: 'Showcased here', tech: 'Technologies in use' },
+        brandRole: 'Full-stack developer',
+        eyebrow: 'Full-stack web developer · Portfolio 2026',
+        roles: ['Full-stack web developer', 'JavaScript & C# engineer', 'React · .NET · Node.js', 'Coding since childhood'],
+        introA: 'Programming has been my world since childhood. Years spent across different technologies and operating systems turned curiosity into craft.',
+        introB: 'Today I design and build full-stack web products with JavaScript and C#: React interfaces, .NET and Node.js services, end to end.',
+        getInTouch: 'Start a project',
+        stats: { repos: 'Public repositories', domains: 'Project domains', tech: 'Technologies in use' },
         projectsLabel: 'Selected work',
         projectsHeading: 'Projects',
-        projectsChip: (n: number) => `${n} builds ↗`,
-        projectsIntro: 'Real repositories from my GitHub — every card opens for the full story.',
-        filters: { all: 'All', platform: 'Platforms', app: 'Apps & games', learning: 'Learning' },
+        projectsChip: (n: number) => `${n} projects ↗`,
+        projectsIntro: 'Shipped work, live on GitHub. Every card opens the full story and the source behind it.',
+        filters: { all: 'All', platform: 'Platforms', app: 'Apps & games', learning: 'Learning' } as Record<'all' | Category, string>,
         details: 'Details',
         inDevelopment: 'In development',
-        privateRepo: 'Private project showcase',
         builtWith: 'Built with',
         repositories: 'Repositories',
         skillHighlight: (s: string) => `Highlighting projects that use ${s}. Tap the skill again to clear.`,
@@ -132,45 +97,40 @@ const STR = {
         journeyHeading: 'Journey',
         journeyChip: (from: string, to: string) => `${from} → ${to}`,
         journey: [
-            { year: '2024', text: 'Foundations — HTML & CSS templates from ElZero Web School: Leon, Kasper, ViSi0N and Dashboard, plus a full set of CSS assignments.' },
-            { year: '2025', text: 'First game — Faar-Counter, a funny rat-hitting counter game with an Arabic interface.' },
-            { year: '2026', text: 'Full apps in React and TypeScript — a memory game for Android, a gamified podcast, a 3D museum and a competitions app.' },
-            { year: 'Today', text: 'AMAL-Academy — a complete courses academy platform, in active development.' },
+            { year: 'Early days', text: 'Started programming as a kid and never stopped. Years across different technologies and operating systems built a deep technical base.' },
+            { year: '2024', text: 'Foundations: four complete HTML & CSS website templates from ElZero Web School (Leon, Kasper, ViSi0N, Dashboard), plus a full set of CSS assignments.' },
+            { year: '2025', text: 'First game: Faar-Counter, a funny rat-hitting counter game with an Arabic interface, in plain HTML, CSS and JavaScript.' },
+            { year: '2026', text: 'Full apps in React and TypeScript: a gamified podcast, a real-time 3D museum and a competitions app that runs live events.' },
+            { year: 'Today', text: 'Going deeper into full-stack: modern JavaScript frameworks up front, with C#/.NET and Node.js behind them.' },
         ],
         skillsLabel: 'The toolbox',
         skillsHeading: 'Skills',
         skillsChip: (n: number) => `${n} tools ✳`,
-        skillsHint: 'Tap a skill to highlight the projects that use it.',
-        nowLabel: 'Right now',
-        nowHeading: 'Currently building',
-        nowTitle: 'AMAL-Academy',
-        nowText: 'A courses academy platform with courses and chapters, video lessons, student enrollments, roles and permissions — plus automated tests guarding the core flows.',
-        nowChips: ['Courses & chapters', 'Video lessons', 'Enrollments', 'Roles & permissions', 'Automated tests'],
         contactLabel: 'Say hello',
         contactHeading: 'Contact',
-        contactText: 'Have an idea in mind? Get in touch, or find more of my work and updates below.',
+        contactText: 'Have a project or an idea worth building? Send it over and we can talk.',
+        contactLabels: { email: 'Email', call: 'Call', whatsapp: 'WhatsApp', linkedin: 'LinkedIn', facebook: 'Facebook' },
+        whatsappCta: 'Send a message',
         copyGithub: 'Copy GitHub link',
         contactGithub: 'GitHub profile',
-        closing: 'Public repositories sync on page load and hourly while open. Private project showcases are maintained separately.',
+        rights: { name: 'Pola Bahaa', reserved: 'All rights reserved.' },
     },
     ar: {
         nav: { projects: 'المشاريع', journey: 'الرحلة', skills: 'المهارات', contact: 'تواصل' },
-        brandRole: 'مطوّر واجهات أمامية',
-        eyebrow: 'بورتفوليو تفاعلي · 2026',
-        roles: ['مطوّر واجهات أمامية', 'بيبني بـ React وTypeScript', 'مطوّر ألعاب', 'مهووس بالتصميم'],
-        introA: 'حاليًا ببني منصة AMAL-Academy — أكاديمية كورسات متكاملة — بـ React وTypeScript وSupabase.',
-        introB: 'ببني تجارب ويب تفاعلية — من ألعاب خفيفة ومتحف ثلاثي الأبعاد بيترسم لحظيًا لحد منصات كاملة.',
-        getInTouch: 'تواصل معايا',
-        heroNote: 'كل زرار في الصفحة دي شغال: جرّب الفلاتر، افتح أي مشروع، دوس على مهارة، أو بدّل اللغة.',
-        stats: { repos: 'مستودع عام على GitHub', publicRepos: 'عرض لمشروع خاص', showcased: 'معروض هنا', tech: 'تقنية شغال بيها' },
+        brandRole: 'مطوّر Full-Stack',
+        eyebrow: 'مطوّر ويب Full-Stack · بورتفوليو 2026',
+        roles: ['مطوّر ويب Full-Stack', 'بشتغل بـ JavaScript وC#', 'React · .NET · Node.js', 'ببرمج من وأنا طفل'],
+        introA: 'البرمجة عالمي من وأنا طفل. سنين بشتغل فيها مع تكنولوجيا وأنظمة تشغيل مختلفة، لحد ما الفضول بقى حرفة.',
+        introB: 'دلوقتي بصمّم وببني منتجات ويب Full-Stack بـ JavaScript وC#: واجهات React، وخدمات .NET وNode.js، من أول سطر لحد التسليم.',
+        getInTouch: 'يلا نبدأ مشروعك',
+        stats: { repos: 'مستودع عام على GitHub', domains: 'مجال للمشاريع', tech: 'تقنية شغال بيها' },
         projectsLabel: 'أعمال مختارة',
         projectsHeading: 'المشاريع',
-        projectsChip: (n: number) => `${n} مشاريع ↗`,
-        projectsIntro: 'مستودعات حقيقية من GitHub بتاعي — كل كارت بيتفتح بالقصة الكاملة.',
-        filters: { all: 'الكل', platform: 'منصات', app: 'تطبيقات وألعاب', learning: 'رحلة التعلم' },
+        projectsChip: (n: number) => `${n} مشروع ↗`,
+        projectsIntro: 'شغل حقيقي متسلّم وموجود على GitHub. كل كارت بيتفتح بالقصة الكاملة والكود اللي وراها.',
+        filters: { all: 'الكل', platform: 'منصات', app: 'تطبيقات وألعاب', learning: 'رحلة التعلم' } as Record<'all' | Category, string>,
         details: 'التفاصيل',
         inDevelopment: 'تحت التطوير',
-        privateRepo: 'عرض مشروع خاص',
         builtWith: 'التقنيات المستخدمة',
         repositories: 'المستودعات',
         skillHighlight: (s: string) => `بظهر المشاريع اللي استخدمت ${s}. دوس على المهارة تاني عشان تمسح التحديد.`,
@@ -178,26 +138,23 @@ const STR = {
         journeyHeading: 'الرحلة',
         journeyChip: (from: string, to: string) => `${from} ← ${to}`,
         journey: [
-            { year: '2024', text: 'الأساس — قوالب HTML وCSS من ElZero Web School: Leon وKasper وViSi0N وDashboard، بالإضافة لمجموعة تكليفات CSS كاملة.' },
-            { year: '2025', text: 'أول لعبة — Faar-Counter، لعبة عداد ضرب الفأر المضحكة بواجهة عربية.' },
-            { year: '2026', text: 'تطبيقات كاملة بـ React وTypeScript — لعبة ذاكرة للأندرويد، وبودكاست تفاعلي، ومتحف ثلاثي الأبعاد، وتطبيق مسابقات.' },
-            { year: 'دلوقتي', text: 'منصة AMAL-Academy — أكاديمية كورسات متكاملة، تحت التطوير حاليًا.' },
+            { year: 'البداية', text: 'بدأت أبرمج وأنا طفل ومكمّل من ساعتها. سنين مع تكنولوجيا وأنظمة تشغيل مختلفة بنتلي قاعدة تقنية قوية.' },
+            { year: '2024', text: 'الأساس: أربع قوالب مواقع كاملة بـ HTML وCSS من ElZero Web School (Leon وKasper وViSi0N وDashboard)، مع مجموعة تكليفات CSS كاملة.' },
+            { year: '2025', text: 'أول لعبة: Faar-Counter، لعبة عداد ضرب الفأر المضحكة بواجهة عربية، مكتوبة بـ HTML وCSS وJavaScript بس.' },
+            { year: '2026', text: 'تطبيقات كاملة بـ React وTypeScript: بودكاست تفاعلي، ومتحف 3D بيترسم لحظيًا، وتطبيق مسابقات بيشتغل في الفعاليات الحقيقية.' },
+            { year: 'دلوقتي', text: 'بتعمّق أكتر في الـ Full-Stack: frameworks حديثة للواجهة، وC#/.NET وNode.js في الباك إند.' },
         ],
         skillsLabel: 'صندوق الأدوات',
         skillsHeading: 'المهارات',
         skillsChip: (n: number) => `${n} أداة ✳`,
-        skillsHint: 'دوس على أي مهارة عشان تظهر المشاريع اللي استخدمتها.',
-        nowLabel: 'دلوقتي',
-        nowHeading: 'بشتغل على',
-        nowTitle: 'AMAL-Academy',
-        nowText: 'منصة أكاديمية كورسات فيها كورسات وفصول وفيديوهات وتسجيل طلاب وصلاحيات — بالإضافة لاختبارات آلية بتحمي الوظائف الأساسية.',
-        nowChips: ['كورسات وفصول', 'فيديوهات تعليمية', 'تسجيل الطلاب', 'الأدوار والصلاحيات', 'اختبارات آلية'],
         contactLabel: 'قول أهلًا',
         contactHeading: 'التواصل',
-        contactText: 'عندك فكرة حابب نتكلم فيها؟ ابعتلي، أو تابع شغلي وآخر أخباري من الروابط دي.',
+        contactText: 'عندك مشروع أو فكرة تستاهل تتبني؟ ابعتهالي ونكلم بعض.',
+        contactLabels: { email: 'الإيميل', call: 'اتصال', whatsapp: 'واتساب', linkedin: 'لينكدإن', facebook: 'فيسبوك' },
+        whatsappCta: 'ابعتلي رسالة',
         copyGithub: 'انسخ لينك GitHub',
         contactGithub: 'حساب GitHub',
-        closing: 'المستودعات العامة بتتحدث عند فتح الصفحة وكل ساعة وهي مفتوحة. عروض المشاريع الخاصة بتتحدّث بشكل منفصل.',
+        rights: { name: 'بولا بهاء', reserved: 'جميع الحقوق محفوظة.' },
     },
 };
 
@@ -235,6 +192,50 @@ function SectionChip({ tone, tilt, children }: { tone: 'teal' | 'yellow' | 'oran
     return <span className={`pb-section-chip pb-st-${tone}`} style={{ '--tilt': tilt } as React.CSSProperties}>{children}</span>;
 }
 
+// Playful sticker: pops in on load, shakes on hover, drops and bounces back on tap/click.
+function StickerBubble({ s, lang }: { s: Sticker; lang: Lang }) {
+    const [phase, setPhase] = useState<'pop' | 'idle' | 'drop'>('pop');
+    const cls = phase === 'drop' ? 'pb-sticker-drop' : phase === 'idle' ? 'pb-sticker-settled' : '';
+    return <div
+        className={`pb-sticker pb-st-${s.kind} pb-st-${s.tone} ${s.pos}${cls ? ' ' + cls : ''}`}
+        dir="auto"
+        style={{ '--tilt': s.tilt, animationDelay: phase === 'pop' ? s.delay : undefined } as React.CSSProperties}
+        onPointerDown={() => { if (phase !== 'drop') setPhase('drop'); }}
+        onAnimationEnd={e => { if (e.animationName === 'pb-pop' || e.animationName === 'pb-drop') setPhase('idle'); }}
+        role="button" tabIndex={0} aria-label={s.lines[lang].join(' ')}
+        onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (phase !== 'drop') setPhase('drop'); } }}
+    >
+        {s.lines[lang].map((line, i) => <span key={i} className="pb-sticker-line">{line}</span>)}
+        {s.sub ? <span className="pb-sticker-sub">{s.sub[lang]}</span> : null}
+    </div>;
+}
+
+// Small contact icons, colored from the site's palette.
+function ContactIcon({ kind }: { kind: 'email' | 'call' | 'whatsapp' | 'linkedin' | 'facebook' }) {
+    const common = { width: 20, height: 20, viewBox: '0 0 24 24', 'aria-hidden': true as const, focusable: false as const };
+    switch (kind) {
+        case 'email':
+            return <svg {...common}><path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" /></svg>;
+        case 'call':
+            return <svg {...common}><path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" /></svg>;
+        case 'whatsapp':
+            return <svg {...common}>
+                <path fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" d="M12 3.2a8.8 8.8 0 0 0-7.6 13.3L3.2 20.8l4.4-1.2A8.8 8.8 0 1 0 12 3.2z" />
+                <path fill="currentColor" d="M9.2 8.1c.3-.3.7-.3.9.1l.7 1.2c.1.3.1.6-.1.8l-.5.5c.5 1 1.3 1.8 2.3 2.3l.5-.5c.2-.2.5-.2.8-.1l1.2.7c.4.2.4.6.1.9-.5.5-1.1.8-1.8.7-2.8-.4-5-2.6-5.4-5.4-.1-.7.2-1.4.7-1.9l.6-.3z" />
+            </svg>;
+        case 'linkedin':
+            return <svg {...common}>
+                <rect x="3" y="3" width="18" height="18" rx="4" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                <text x="12" y="16.2" textAnchor="middle" fontSize="9.5" fontWeight="800" fontFamily="inherit" fill="currentColor">in</text>
+            </svg>;
+        case 'facebook':
+            return <svg {...common}>
+                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                <text x="12" y="16.8" textAnchor="middle" fontSize="11" fontWeight="800" fontFamily="inherit" fill="currentColor">f</text>
+            </svg>;
+    }
+}
+
 export function App() {
     const [langRaw, setLang, saved] = useLocalState<Lang>('pola-portfolio.lang.v1', 'en');
     const lang: Lang = langRaw === 'ar' ? 'ar' : 'en';
@@ -257,10 +258,8 @@ export function App() {
         const id = window.setInterval(() => setSyncVersion(v => v + 1), 60 * 60 * 1000);
         return () => window.clearInterval(id);
     }, []);
-    const projects: Project[] = [
-        ...curatedProjects.filter(project => project.visibility === 'private'),
-        ...repos.map(repo => repoToProject(repo, curatedProjects)),
-    ];
+    // Public repositories only. Private work never appears here.
+    const projects: Project[] = repos.map(repo => repoToProject(repo, curatedProjects));
 
     const [filter, setFilter] = useState<'all' | Category>('all');
     const [activeSkill, setActiveSkill] = useState<string | null>(null);
@@ -312,11 +311,23 @@ export function App() {
         }
     }, [repos, openId]);
 
+    // Only offer filters that actually have projects.
+    const presentCategories = (['platform', 'app', 'learning'] as Category[]).filter(c => projects.some(p => p.category === c));
+    const domainCount = new Set(projects.map(p => p.category)).size;
+
+    const contactRows: { kind: 'email' | 'call' | 'whatsapp' | 'linkedin' | 'facebook'; href: string; strong: string; strongDir?: 'ltr' }[] = [
+        { kind: 'email', href: 'mailto:pola.bahaa753@gmail.com', strong: 'pola.bahaa753@gmail.com', strongDir: 'ltr' },
+        { kind: 'call', href: 'tel:+201284978352', strong: '+20 128 497 8352', strongDir: 'ltr' },
+        { kind: 'whatsapp', href: 'https://wa.me/201284978352?text=Hi+Pola%21', strong: t.whatsappCta },
+        { kind: 'linkedin', href: 'https://www.linkedin.com/in/pola-bahaa/', strong: 'Pola Bahaa' },
+        { kind: 'facebook', href: 'https://www.facebook.com/pola.vision/', strong: 'Pola ViSi0N' },
+    ];
+
     return <div id="pb-top" className="pb-root">
         <FileCard lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
             <div className="pb-hero">
                 <nav className="pb-nav" aria-label="Portfolio sections">
-                    <button type="button" className="pb-brand" onClick={() => scrollToId('pb-top')} aria-label="Pola Bahaa — back to top">
+                    <button type="button" className="pb-brand" onClick={() => scrollToId('pb-top')} aria-label="Pola Bahaa, back to top">
                         <img className="pb-brand-logo" src={brandLogo} alt="" aria-hidden="true" />
                         <span className="pb-brand-text">Pola Bahaa<span className="pb-brand-role">{t.brandRole}</span></span>
                     </button>
@@ -345,22 +356,17 @@ export function App() {
 
                 <div className="pb-gridfield">
                     <div className="pb-portrait"><img src={portraitCutout} alt={lang === 'ar' ? 'صورة بولا' : 'Portrait of Pola'} /></div>
-                    {stickers.map(s => <div key={s.pos} className={`pb-sticker pb-st-${s.kind} pb-st-${s.tone} ${s.pos}`} style={{ '--tilt': s.tilt, animationDelay: s.delay } as React.CSSProperties}>
-                        {s.lines[lang].map((line, i) => <span key={i} className="pb-sticker-line">{line}</span>)}
-                        {s.sub ? <span className="pb-sticker-sub">{s.sub[lang]}</span> : null}
-                    </div>)}
+                    {stickers.map(s => <StickerBubble key={s.pos} s={s} lang={lang} />)}
                 </div>
 
                 <div className="pb-ticker" dir="ltr" aria-hidden="true">
                     <div className="pb-ticker-track">{[...skills, ...skills].map((s, i) => <span key={i} className="pb-ticker-item">{s}</span>)}</div>
                 </div>
-                <p className="pb-hero-note">{t.heroNote}</p>
             </div>
 
             <section className="pb-stats pb-reveal" aria-label="Numbers">
                 <div className="pb-stat"><Counter to={repos.length} /><span className="pb-stat-label">{t.stats.repos}</span></div>
-                <div className="pb-stat"><Counter to={curatedProjects.filter(p => p.visibility === 'private').length} /><span className="pb-stat-label">{t.stats.publicRepos}</span></div>
-                <div className="pb-stat"><Counter to={projects.length} /><span className="pb-stat-label">{t.stats.showcased}</span></div>
+                <div className="pb-stat"><Counter to={domainCount} /><span className="pb-stat-label">{t.stats.domains}</span></div>
                 <div className="pb-stat"><Counter to={skills.length} /><span className="pb-stat-label">{t.stats.tech}</span></div>
             </section>
 
@@ -370,7 +376,7 @@ export function App() {
                         <p className="pb-label">{t.projectsLabel}</p>
                         <h2 className="pb-heading">{t.projectsHeading}</h2>
                     </div>
-                    <SectionChip tone="teal" tilt="5deg">{t.projectsChip(projects.length)}</SectionChip>
+                    <SectionChip tone="yellow" tilt="5deg">{t.projectsChip(projects.length)}</SectionChip>
                 </div>
                 <p className="pb-intro pb-reveal">{t.projectsIntro}</p>
                 <div className="pb-sync" role="status">
@@ -381,7 +387,8 @@ export function App() {
                     <button type="button" disabled={syncState === 'loading'} onClick={() => setSyncVersion(v => v + 1)}>{lang === 'ar' ? 'تحديث' : 'Refresh'}</button>
                 </div>
                 <div className="pb-chips pb-reveal" role="group" aria-label="Filter projects">
-                    {(['all', 'platform', 'app', 'learning'] as const).map(c =>
+                    <button type="button" className={`pb-chip${filter === 'all' ? ' is-active' : ''}`} aria-pressed={filter === 'all'} onClick={() => setFilter('all')}>{t.filters.all}</button>
+                    {presentCategories.map(c =>
                         <button key={c} type="button" className={`pb-chip${filter === c ? ' is-active' : ''}`} aria-pressed={filter === c} onClick={() => setFilter(c)}>{t.filters[c]}</button>
                     )}
                 </div>
@@ -397,7 +404,6 @@ export function App() {
                             </div>
                             <div className="pb-card-badges">
                                 {p.status === 'development' ? <span className="pb-badge pb-badge-dev">{t.inDevelopment}</span> : null}
-                                {p.visibility === 'private' ? <span className="pb-badge">{t.privateRepo}</span> : null}
                             </div>
                             <p className="pb-card-tagline">{p.tagline[lang]}</p>
                             <div className="pb-card-stack">{p.stack.map(s => <span key={s} className="pb-tag">{s}</span>)}</div>
@@ -434,19 +440,8 @@ export function App() {
                     </div>
                     <SectionChip tone="orange" tilt="6deg">{t.skillsChip(skills.length)}</SectionChip>
                 </div>
-                <Caption>{t.skillsHint}</Caption>
                 <div className="pb-skills pb-reveal">
                     {skills.map(s => <button key={s} type="button" className={`pb-skill${activeSkill === s ? ' is-active' : ''}`} aria-pressed={activeSkill === s} onClick={() => pickSkill(s)}>{s}</button>)}
-                </div>
-            </section>
-
-            <section className="pb-section">
-                <div className="pb-now pb-reveal">
-                    <p className="pb-now-label">{t.nowLabel}</p>
-                    <h2 className="pb-now-heading">{t.nowHeading}</h2>
-                    <p className="pb-now-title">{t.nowTitle}</p>
-                    <p className="pb-now-text">{t.nowText}</p>
-                    <div className="pb-now-chips">{t.nowChips.map(c => <span key={c} className="pb-now-chip">{c}</span>)}</div>
                 </div>
             </section>
 
@@ -456,11 +451,14 @@ export function App() {
                     <h2 className="pb-contact-heading">{t.contactHeading}</h2>
                     <p className="pb-contact-text">{t.contactText}</p>
                     <div className="pb-contact-grid">
-                        <a className="pb-contact-link" href="mailto:pola.bahaa753@gmail.com"><span>{lang === 'ar' ? 'الإيميل' : 'Email'}</span><strong dir="ltr">pola.bahaa753@gmail.com</strong><span aria-hidden="true">↗</span></a>
-                        <a className="pb-contact-link" href="tel:+201284978352"><span>{lang === 'ar' ? 'اتصال' : 'Call'}</span><strong dir="ltr">+20 128 497 8352</strong><span aria-hidden="true">↗</span></a>
-                        <a className="pb-contact-link" href="https://wa.me/201284978352?text=Hi+Pola%21" target="_blank" rel="noopener noreferrer"><span>WhatsApp</span><strong>{lang === 'ar' ? 'ابعتلي رسالة' : 'Send a message'}</strong><span aria-hidden="true">↗</span></a>
-                        <a className="pb-contact-link" href="https://www.linkedin.com/in/pola-bahaa/" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><strong>Pola Bahaa</strong><span aria-hidden="true">↗</span></a>
-                        <a className="pb-contact-link" href="https://www.facebook.com/pola.vision/" target="_blank" rel="noopener noreferrer"><span>Facebook</span><strong>Pola ViSi0N</strong><span aria-hidden="true">↗</span></a>
+                        {contactRows.map(row =>
+                            <a key={row.kind} className={`pb-contact-link pb-contact-${row.kind}`} href={row.href} {...(row.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                                <span className="pb-contact-icon" aria-hidden="true"><ContactIcon kind={row.kind} /></span>
+                                <span className="pb-contact-kind">{t.contactLabels[row.kind]}</span>
+                                <strong dir={row.strongDir}>{row.strong}</strong>
+                                <span className="pb-contact-arrow" aria-hidden="true">↗</span>
+                            </a>
+                        )}
                     </div>
                     <div className="pb-contact-actions">
                         <ButtonLink href={githubUrl} variant="primary" pill>{t.contactGithub}</ButtonLink>
@@ -469,7 +467,7 @@ export function App() {
                 </div>
             </section>
 
-            <Closing><img className="pb-footer-logo" src={brandLogo} alt="Pola Bahaa logo" /><span>{t.closing}</span></Closing>
+            <Closing><img className="pb-footer-logo" src={brandLogo} alt="Pola Bahaa logo" /><span className="pb-rights"><span dir="ltr">© 2026</span> {t.rights.name}. {t.rights.reserved}</span></Closing>
         </FileCard>
 
         <dialog ref={dialogRef} className="pb-dialog" onClose={() => setOpenId(null)} onClick={e => { if (e.target === dialogRef.current) dialogRef.current?.close(); }}>
@@ -481,17 +479,15 @@ export function App() {
                 </div>
                 <div className="pb-card-badges">
                     {openProject.status === 'development' ? <span className="pb-badge pb-badge-dev">{t.inDevelopment}</span> : null}
-                    {openProject.visibility === 'private' ? <span className="pb-badge">{t.privateRepo}</span> : null}
                 </div>
                 <p className="pb-dialog-tagline">{openProject.tagline[lang]}</p>
                 <p className="pb-dialog-detail">{openProject.detail[lang]}</p>
                 <p className="pb-dialog-sublabel">{t.builtWith}</p>
                 <div className="pb-card-stack">{openProject.stack.map(s => <span key={s} className="pb-tag">{s}</span>)}</div>
-                {openProject.url || openProject.extraLinks ? <>
+                {openProject.url ? <>
                     <p className="pb-dialog-sublabel">{t.repositories}</p>
                     <div className="pb-dialog-links">
-                        {openProject.url ? <TextLink href={openProject.url}>GitHub — {openProject.name}</TextLink> : null}
-                        {openProject.extraLinks?.map(l => <TextLink key={l.href} href={l.href}>GitHub — {l.label}</TextLink>)}
+                        <TextLink href={openProject.url}>GitHub · {openProject.name}</TextLink>
                     </div>
                 </> : null}
             </div> : null}

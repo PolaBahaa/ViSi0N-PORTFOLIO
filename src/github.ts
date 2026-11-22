@@ -35,7 +35,6 @@ export function repoToProject(repo: PublicRepo, curated: Project[]): Project {
         name: repo.name,
         year: repo.created_at.slice(0, 4),
         category: existing?.category ?? (/^(HTML_CSS_|CSS_)/.test(repo.name) ? 'learning' : 'app'),
-        visibility: 'public',
         url: repo.html_url,
         stack: existing?.stack ?? (repo.language ? [repo.language] : ['GitHub']),
         tagline: existing?.tagline ?? {

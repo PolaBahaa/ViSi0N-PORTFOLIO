@@ -1,6 +1,6 @@
 # ViSi0N PORTFOLIO
 
-Pola Bahaa's interactive front-end portfolio: projects, journey and skills, in English and Arabic.
+Pola Bahaa's interactive full-stack portfolio: projects, journey and skills, in English and Arabic.
 
 Live preview: https://polabahaa.github.io/ViSi0N-PORTFOLIO/
 
@@ -33,6 +33,6 @@ history is the version history.
 
 ## Public repository sync
 
-The project grid fetches all public repositories from the unauthenticated GitHub API on each page load and once per hour while the page stays open. A Refresh control is available too. Pagination supports more than 100 repositories. New public repositories appear automatically; deleted or newly private repositories disappear after a successful sync. The two separately maintained private project showcases are not queried from GitHub.
+The project grid fetches all public repositories from the unauthenticated GitHub API on each page load and once per hour while the page stays open. A Refresh control is available too. Pagination supports more than 100 repositories. New public repositories appear automatically; deleted or newly private repositories disappear after a successful sync. Only public repositories ever appear on the page.
 
 No GitHub credentials are shipped to visitors. If GitHub is offline or its unauthenticated rate limit is reached, the grid keeps the last available snapshot and shows an explicit warning. The build includes a public-only fallback snapshot in `src/repos-snapshot.json`.
