@@ -23,12 +23,21 @@ export type Project = {
 // entirely by the GitHub API; this only enriches matching public repos.
 const curatedProjects: Project[] = [
     {
+        id: 1, name: 'ViSi0N-PORTFOLIO', year: '2026', category: 'app', url: 'https://github.com/PolaBahaa/ViSi0N-PORTFOLIO',
+        stack: ['TypeScript'],
+        tagline: { en: 'This site: an interactive bilingual portfolio, live on GitHub Pages.', ar: 'الموقع ده نفسه: بورتفوليو تفاعلي بلغتين، لايف على GitHub Pages.' },
+        detail: {
+            en: 'The source behind this page: React, TypeScript and hand-written CSS, synced live with the public GitHub repositories.',
+            ar: 'الكود ورا الصفحة دي: React وTypeScript وCSS مكتوب بالإيد، متزامن لايف مع مستودعات GitHub العامة.',
+        },
+    },
+    {
         id: 2, name: 'HAMOURY', year: '2026', category: 'app', url: 'https://github.com/PolaBahaa/HAMOURY',
         stack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Firebase'],
         tagline: { en: 'A fun activities and competitions app built for a church summer trip.', ar: 'تطبيق أنشطة ومسابقات ممتع، معمول لرحلة صيفية للكنيسة.' },
         detail: {
-            en: 'Runs games and competitions on real event days. Built with Firebase and QR code scanning, with confetti celebrations baked in.',
-            ar: 'بيشغّل ألعاب ومسابقات في أيام الرحلة فعلًا. مبني بـ Firebase ومسح رموز QR، ومعاه احتفالات كونفيتي جاهزة.',
+            en: 'Runs activities and competitions on real event days. Built with Firebase and QR code scanning, with confetti celebrations baked in.',
+            ar: 'بيشغّل أنشطة ومسابقات في أيام الرحلة فعلًا. مبني بـ Firebase ومسح رموز QR، ومعاه احتفالات كونفيتي جاهزة.',
         },
     },
     {
@@ -43,19 +52,10 @@ const curatedProjects: Project[] = [
     {
         id: 4, name: 'MMH-Podcast', year: '2026', category: 'app', url: 'https://github.com/PolaBahaa/MMH-Podcast',
         stack: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
-        tagline: { en: 'A gamified Christian podcast experience made for SPP 2026.', ar: 'تجربة بودكاست مسيحي تفاعلية بأسلوب الألعاب، معمولة لـ SPP 2026.' },
+        tagline: { en: 'An interactive Christian podcast experience made for SPP 2026.', ar: 'تجربة بودكاست مسيحي تفاعلية، معمولة لـ SPP 2026.' },
         detail: {
-            en: 'Podcast listening turned into a game, built as a modern single-page React app.',
-            ar: 'سماع البودكاست اتحوّل للعبة، مبنية كتطبيق React حديث من صفحة واحدة.',
-        },
-    },
-    {
-        id: 6, name: 'Faar-Counter', year: '2025', category: 'app', url: 'https://github.com/PolaBahaa/Faar-Counter',
-        stack: ['HTML', 'CSS', 'JavaScript'],
-        tagline: { en: 'A funny rat-hitting counter game with an Arabic interface.', ar: 'لعبة عداد ضرب الفأر المضحكة، بواجهة عربية.' },
-        detail: {
-            en: 'Plain HTML, CSS and JavaScript with no frameworks. A silly idea turned into a playable little game.',
-            ar: 'HTML وCSS وJavaScript بس من غير أي frameworks. فكرة ظريفة اتحولت للعبة صغيرة تتلعب فعلًا.',
+            en: 'Podcast listening turned into an interactive experience, built as a modern single-page React app.',
+            ar: 'سماع البودكاست بقى تجربة تفاعلية، مبنية كتطبيق React حديث من صفحة واحدة.',
         },
     },
 ];
@@ -65,19 +65,18 @@ const skills = ['JavaScript', 'TypeScript', 'C#', '.NET', 'React', 'Node.js', 'E
 type Sticker = { pos: string; kind: 'pill' | 'circle'; tone: 'teal' | 'yellow' | 'orange' | 'pink' | 'green'; tilt: string; delay: string; lines: Record<Lang, string[]>; sub?: Record<Lang, string> };
 
 const stickers: Sticker[] = [
-    { pos: 'pb-pos-1', kind: 'circle', tone: 'teal', tilt: '-7deg', delay: '0.05s', lines: { en: ['FULL', 'STACK'], ar: ['فول', 'ستاك'] }, sub: { en: 'JS · C# · WEB', ar: 'JS · C# · WEB' } },
+    { pos: 'pb-pos-1', kind: 'circle', tone: 'teal', tilt: '-7deg', delay: '0.05s', lines: { en: ['FULL', 'STACK'], ar: ['تطوير', 'ويب'] }, sub: { en: 'JS · C# · WEB', ar: 'JS · C# · WEB' } },
     { pos: 'pb-pos-2', kind: 'pill', tone: 'yellow', tilt: '-6deg', delay: '0.15s', lines: { en: ['REACT ↗', 'TYPESCRIPT'], ar: ['React ↗', 'TypeScript'] } },
     { pos: 'pb-pos-3', kind: 'pill', tone: 'orange', tilt: '5deg', delay: '0.25s', lines: { en: ['M ⟶TION &', 'INTERACTION'], ar: ['حركة ⟶', 'وتفاعل'] } },
     { pos: 'pb-pos-4', kind: 'pill', tone: 'pink', tilt: '6deg', delay: '0.35s', lines: { en: ['RESPONSIVE', 'DESIGN ©'], ar: ['تصميم', 'متجاوب ©'] } },
     { pos: 'pb-pos-5', kind: 'pill', tone: 'teal', tilt: '-5deg', delay: '0.45s', lines: { en: ['.NET · NODE', "✳ '26"], ar: ['.NET · Node', "✳ '26"] } },
-    { pos: 'pb-pos-6', kind: 'circle', tone: 'green', tilt: '8deg', delay: '0.55s', lines: { en: ['GAME', 'DEV'], ar: ['تطوير', 'ألعاب'] }, sub: { en: '· WEB · 3D ·', ar: '· ويب · 3D ·' } },
 ];
 
 const STR = {
     en: {
         nav: { projects: 'Projects', journey: 'Journey', skills: 'Skills', contact: 'Contact' },
         brandRole: 'Full-stack developer',
-        eyebrow: 'Full-stack web developer · Portfolio 2026',
+        eyebrow: '"If you want to test a man\'s character, give him power" - Lincoln',
         roles: ['Full-stack web developer', 'JavaScript & C# engineer', 'React · .NET · Node.js', 'Coding since childhood'],
         introA: 'Programming has been my world since childhood. Years spent across different technologies and operating systems turned curiosity into craft.',
         introB: 'Today I design and build full-stack web products with JavaScript and C#: React interfaces, .NET and Node.js services, end to end.',
@@ -87,7 +86,7 @@ const STR = {
         projectsHeading: 'Projects',
         projectsChip: (n: number) => `${n} projects ↗`,
         projectsIntro: 'Shipped work, live on GitHub. Every card opens the full story and the source behind it.',
-        filters: { all: 'All', platform: 'Platforms', app: 'Apps & games', learning: 'Learning' } as Record<'all' | Category, string>,
+        filters: { all: 'All', platform: 'Platforms', app: 'Apps', learning: 'Learning' } as Record<'all' | Category, string>,
         details: 'Details',
         inDevelopment: 'In development',
         builtWith: 'Built with',
@@ -98,9 +97,10 @@ const STR = {
         journeyChip: (from: string, to: string) => `${from} → ${to}`,
         journey: [
             { year: 'Early days', text: 'Started programming as a kid and never stopped. Years across different technologies and operating systems built a deep technical base.' },
+            { year: '2019', text: 'The start of intensive, structured programming study.' },
+            { year: 'Along the way', text: 'More than 6 Python certificates and more than 11 intensive frontend and JavaScript courses from different providers, a Full-Stack .NET certificate from ITI (Information Technology Institute) through its annual student training, and a Full-Stack JavaScript certificate from EgyptFWD with Udacity.' },
             { year: '2024', text: 'Foundations: four complete HTML & CSS website templates from ElZero Web School (Leon, Kasper, ViSi0N, Dashboard), plus a full set of CSS assignments.' },
-            { year: '2025', text: 'First game: Faar-Counter, a funny rat-hitting counter game with an Arabic interface, in plain HTML, CSS and JavaScript.' },
-            { year: '2026', text: 'Full apps in React and TypeScript: a gamified podcast, a real-time 3D museum and a competitions app that runs live events.' },
+            { year: '2026', text: 'Full apps in React and TypeScript: an interactive podcast, a real-time 3D museum and a competitions app that runs live events.' },
             { year: 'Today', text: 'Going deeper into full-stack: modern JavaScript frameworks up front, with C#/.NET and Node.js behind them.' },
         ],
         skillsLabel: 'The toolbox',
@@ -118,7 +118,7 @@ const STR = {
     ar: {
         nav: { projects: 'المشاريع', journey: 'الرحلة', skills: 'المهارات', contact: 'تواصل' },
         brandRole: 'مطوّر Full-Stack',
-        eyebrow: 'مطوّر ويب Full-Stack · بورتفوليو 2026',
+        eyebrow: '"لو عايز تختبر معدن الراجل، اديله سلطة" - لينكولن',
         roles: ['مطوّر ويب Full-Stack', 'بشتغل بـ JavaScript وC#', 'React · .NET · Node.js', 'ببرمج من وأنا طفل'],
         introA: 'البرمجة عالمي من وأنا طفل. سنين بشتغل فيها مع تكنولوجيا وأنظمة تشغيل مختلفة، لحد ما الفضول بقى حرفة.',
         introB: 'دلوقتي بصمّم وببني منتجات ويب Full-Stack بـ JavaScript وC#: واجهات React، وخدمات .NET وNode.js، من أول سطر لحد التسليم.',
@@ -128,7 +128,7 @@ const STR = {
         projectsHeading: 'المشاريع',
         projectsChip: (n: number) => `${n} مشروع ↗`,
         projectsIntro: 'شغل حقيقي متسلّم وموجود على GitHub. كل كارت بيتفتح بالقصة الكاملة والكود اللي وراها.',
-        filters: { all: 'الكل', platform: 'منصات', app: 'تطبيقات وألعاب', learning: 'رحلة التعلم' } as Record<'all' | Category, string>,
+        filters: { all: 'الكل', platform: 'منصات', app: 'تطبيقات', learning: 'رحلة التعلم' } as Record<'all' | Category, string>,
         details: 'التفاصيل',
         inDevelopment: 'تحت التطوير',
         builtWith: 'التقنيات المستخدمة',
@@ -139,8 +139,9 @@ const STR = {
         journeyChip: (from: string, to: string) => `${from} ← ${to}`,
         journey: [
             { year: 'البداية', text: 'بدأت أبرمج وأنا طفل ومكمّل من ساعتها. سنين مع تكنولوجيا وأنظمة تشغيل مختلفة بنتلي قاعدة تقنية قوية.' },
+            { year: '2019', text: 'بداية الدراسة والتدريب المكثّف المنظّم في البرمجة.' },
+            { year: 'على مدار الرحلة', text: 'أكتر من 6 شهادات في Python، وأكتر من 11 كورس مكثّف في الفرونت إند وJavaScript من جهات مختلفة، وشهادة Full-Stack .NET من ITI (معهد تكنولوجيا المعلومات) من خلال تدريبه السنوي للطلاب، وشهادة Full-Stack بـ JavaScript من EgyptFWD وUdacity.' },
             { year: '2024', text: 'الأساس: أربع قوالب مواقع كاملة بـ HTML وCSS من ElZero Web School (Leon وKasper وViSi0N وDashboard)، مع مجموعة تكليفات CSS كاملة.' },
-            { year: '2025', text: 'أول لعبة: Faar-Counter، لعبة عداد ضرب الفأر المضحكة بواجهة عربية، مكتوبة بـ HTML وCSS وJavaScript بس.' },
             { year: '2026', text: 'تطبيقات كاملة بـ React وTypeScript: بودكاست تفاعلي، ومتحف 3D بيترسم لحظيًا، وتطبيق مسابقات بيشتغل في الفعاليات الحقيقية.' },
             { year: 'دلوقتي', text: 'بتعمّق أكتر في الـ Full-Stack: frameworks حديثة للواجهة، وC#/.NET وNode.js في الباك إند.' },
         ],

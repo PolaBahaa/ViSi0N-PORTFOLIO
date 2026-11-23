@@ -30,20 +30,10 @@
     "topics": []
   },
   {
-    "id": 1334631571,
-    "name": "Revelation-Museum-Old",
-    "html_url": "https://github.com/PolaBahaa/Revelation-Museum-Old",
-    "description": "Revelation Museum",
-    "language": "TypeScript",
-    "created_at": "2026-08-14T22:46:33Z",
-    "private": false,
-    "topics": []
-  },
-  {
     "id": 1323087471,
     "name": "MMH-Podcast",
     "html_url": "https://github.com/PolaBahaa/MMH-Podcast",
-    "description": "Christian Gamification Podcast for SPP 2026",
+    "description": "Christian interactive podcast for SPP 2026",
     "language": "TypeScript",
     "created_at": "2026-08-04T15:13:44Z",
     "private": false,
@@ -78,16 +68,6 @@
       "webdevelopment",
       "website"
     ]
-  },
-  {
-    "id": 1071154409,
-    "name": "Faar-Counter",
-    "html_url": "https://github.com/PolaBahaa/Faar-Counter",
-    "description": "A Funny idea of hitting a rat with a counter",
-    "language": "CSS",
-    "created_at": "2025-10-07T00:13:24Z",
-    "private": false,
-    "topics": []
   },
   {
     "id": 815862616,

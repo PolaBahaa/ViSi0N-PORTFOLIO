@@ -7,7 +7,13 @@ export type PublicRepo = {
     topics?: string[];
 };
 
-export const initialRepos = snapshot as PublicRepo[];
+// Game projects are deliberately not shown on the page, by the owner's request.
+// The source repositories stay untouched on GitHub; this only filters the display.
+const HIDDEN_REPO_NAMES = ['faar-counter'];
+export const isHiddenRepo = (repo: PublicRepo) =>
+    HIDDEN_REPO_NAMES.includes(repo.name.toLowerCase()) || /game/i.test(repo.name);
+
+export const initialRepos = (snapshot as PublicRepo[]).filter(repo => !isHiddenRepo(repo));
 
 // Only the unauthenticated public endpoint is used. No tokens or private data.
 export async function loadPublicRepos(signal: AbortSignal): Promise<PublicRepo[]> {
@@ -21,7 +27,7 @@ export async function loadPublicRepos(signal: AbortSignal): Promise<PublicRepo[]
         if (!response.ok) throw new Error(`GitHub: ${response.status}`);
         const data: PublicRepo[] = await response.json();
         if (!Array.isArray(data)) throw new Error('Invalid GitHub response');
-        result.push(...data.filter(repo => repo.private === false));
+        result.push(...data.filter(repo => repo.private === false && !isHiddenRepo(repo)));
         if (data.length < 100) return result;
     }
 }
