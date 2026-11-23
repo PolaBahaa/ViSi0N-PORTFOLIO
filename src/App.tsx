@@ -60,7 +60,7 @@ const curatedProjects: Project[] = [
     },
 ];
 
-const skills = ['JavaScript', 'TypeScript', 'C#', '.NET', 'React', 'Node.js', 'Express', 'HTML', 'CSS', 'Tailwind CSS', 'Vite', 'Firebase', 'Supabase', 'Three.js', 'Capacitor', 'Git & GitHub'];
+const skills = ['JavaScript', 'TypeScript', 'C#', '.NET', 'React', 'Node.js', 'Express', 'HTML', 'CSS', 'Tailwind CSS', 'Vite', 'Firebase', 'Supabase', 'Three.js', 'Capacitor', 'Flutter', 'Electron', 'PWA', 'Git & GitHub'];
 
 type Sticker = { pos: string; kind: 'pill' | 'circle'; tone: 'teal' | 'yellow' | 'orange' | 'pink' | 'green'; tilt: string; delay: string; lines: Record<Lang, string[]>; sub?: Record<Lang, string> };
 
@@ -77,7 +77,7 @@ const STR = {
         nav: { projects: 'Projects', journey: 'Journey', skills: 'Skills', contact: 'Contact' },
         brandRole: 'Full-stack developer',
         eyebrow: '"If you want to test a man\'s character, give him power" - Lincoln',
-        roles: ['Full-stack web developer', 'JavaScript & C# engineer', 'React · .NET · Node.js', 'Coding since childhood'],
+        roles: ['Full-stack web developer', 'JavaScript & C# engineer', 'React · .NET · Node.js', 'Flutter · Electron · PWA', 'Coding since childhood'],
         introA: 'Programming has been my world since childhood. Years spent across different technologies and operating systems turned curiosity into craft.',
         introB: 'Today I design and build full-stack web products with JavaScript and C#: React interfaces, .NET and Node.js services, end to end.',
         getInTouch: 'Start a project',
@@ -106,6 +106,7 @@ const STR = {
         skillsLabel: 'The toolbox',
         skillsHeading: 'Skills',
         skillsChip: (n: number) => `${n} tools ✳`,
+        skillsNote: 'Beyond the browser too: mobile apps with Flutter, desktop apps with Electron, and installable progressive web apps (PWA).',
         contactLabel: 'Say hello',
         contactHeading: 'Contact',
         contactText: 'Have a project or an idea worth building? Send it over and we can talk.',
@@ -118,10 +119,10 @@ const STR = {
     ar: {
         nav: { projects: 'المشاريع', journey: 'الرحلة', skills: 'المهارات', contact: 'تواصل' },
         brandRole: 'مطوّر Full-Stack',
-        eyebrow: '"لو عايز تختبر معدن الراجل، اديله سلطة" - لينكولن',
-        roles: ['مطوّر ويب Full-Stack', 'بشتغل بـ JavaScript وC#', 'React · .NET · Node.js', 'ببرمج من وأنا طفل'],
-        introA: 'البرمجة عالمي من وأنا طفل. سنين بشتغل فيها مع تكنولوجيا وأنظمة تشغيل مختلفة، لحد ما الفضول بقى حرفة.',
-        introB: 'دلوقتي بصمّم وببني منتجات ويب Full-Stack بـ JavaScript وC#: واجهات React، وخدمات .NET وNode.js، من أول سطر لحد التسليم.',
+        eyebrow: '"If you want to test a man\'s character, give him power" - Lincoln',
+        roles: ['مطوّر ويب Full-Stack', 'بشتغل بـ JavaScript وC#', 'React · .NET · Node.js', 'Flutter · Electron · PWA', 'ببرمج من وأنا طفل'],
+        introA: 'البرمجة مش مجرد شغل، دي دنيتي من وأنا طفل. قعدت أتعلّم وأجرّب تكنولوجيا وأنظمة مختلفة سنة ورا سنة، لحد ما الفضول بقى حرفة بجد.',
+        introB: 'دلوقتي بصمّم وببني منتجات ويب Full-Stack من الأول للآخر: واجهات React سريعة وشكلها يفتح النفس، وباك إند بـ .NET وNode.js، بـ JavaScript وC#. من أول فكرة لحد ما المشروع يبقى لايف.',
         getInTouch: 'يلا نبدأ مشروعك',
         stats: { repos: 'مستودع عام على GitHub', domains: 'مجال للمشاريع', tech: 'تقنية شغال بيها' },
         projectsLabel: 'أعمال مختارة',
@@ -148,6 +149,7 @@ const STR = {
         skillsLabel: 'صندوق الأدوات',
         skillsHeading: 'المهارات',
         skillsChip: (n: number) => `${n} أداة ✳`,
+        skillsNote: 'ومش بس ويب: بعرف أطوّر تطبيقات موبايل بـ Flutter، وتطبيقات ديسكتوب بـ Electron، وتطبيقات ويب تتثبت على الجهاز بـ PWA.',
         contactLabel: 'قول أهلًا',
         contactHeading: 'التواصل',
         contactText: 'عندك مشروع أو فكرة تستاهل تتبني؟ ابعتهالي ونكلم بعض.',
@@ -298,6 +300,7 @@ export function App() {
     }, [lang, filter, activeSkill, repos]);
 
     const pickSkill = (s: string) => {
+        if (s !== 'Git & GitHub' && !projects.some(p => p.stack.includes(s))) return;
         setActiveSkill(cur => cur === s ? null : s);
         if (activeSkill !== s) scrollToId('pb-projects');
     };
@@ -345,7 +348,7 @@ export function App() {
                 </nav>
                 {saved.message ? <Caption>{saved.message}</Caption> : null}
 
-                <p className="pb-eyebrow">{t.eyebrow}</p>
+                <p className="pb-eyebrow" dir="auto">{t.eyebrow}</p>
                 <h1 className="pb-hero-title">POLA BAHAA</h1>
                 <div className="pb-hero-role"><Rotator words={t.roles} /></div>
 
@@ -444,6 +447,7 @@ export function App() {
                 <div className="pb-skills pb-reveal">
                     {skills.map(s => <button key={s} type="button" className={`pb-skill${activeSkill === s ? ' is-active' : ''}`} aria-pressed={activeSkill === s} onClick={() => pickSkill(s)}>{s}</button>)}
                 </div>
+                <p className="pb-intro pb-reveal">{t.skillsNote}</p>
             </section>
 
             <section className="pb-section pb-contact-block" id="pb-contact">
