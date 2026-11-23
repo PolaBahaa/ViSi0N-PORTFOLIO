@@ -229,7 +229,6 @@ body { background: var(--pb-black); }
 .pb-label-onDark { color: rgba(238,229,224,0.6); }
 .pb-contact-heading { font-family: var(--pb-display); font-size: clamp(44px, 10vw, 96px); line-height: 1; margin: 0 0 16px; color: var(--pb-cream); text-transform: uppercase; }
 .pb-contact-text { color: rgba(238,229,224,0.8); max-width: 560px; line-height: 1.7; margin: 0 0 22px; font-size: 14.5px; }
-.pb-contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .pb-wake { margin-top: 20px; }
 .pb-wake-status { margin: 10px 0 0; font-size: 13px; color: rgba(238,229,224,0.65); }
 

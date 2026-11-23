@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ButtonLink, Caption, CloseButton, Closing, CopyButton, FileCard, TextLink, useLocalState } from './kit';
+import { ButtonLink, Caption, CloseButton, Closing, FileCard, TextLink, useLocalState } from './kit';
 import { initialRepos, loadPublicRepos, repoToProject } from './github';
 import brandLogo from './pola-logo.svg';
 import portraitCutout from './photos/pola-portrait.png';
@@ -110,7 +110,7 @@ const STR = {
         contactLabel: 'Say hello',
         contactHeading: 'Contact',
         contactText: 'Have a project or an idea worth building? Send it over and we can talk.',
-        contactLabels: { email: 'Email', call: 'Call', whatsapp: 'WhatsApp', linkedin: 'LinkedIn', facebook: 'Facebook' },
+        contactLabels: { email: 'Email', call: 'Call', whatsapp: 'WhatsApp', linkedin: 'LinkedIn', facebook: 'Facebook', github: 'GitHub' },
         whatsappCta: 'Send a message',
         copyGithub: 'Copy GitHub link',
         contactGithub: 'GitHub profile',
@@ -153,7 +153,7 @@ const STR = {
         contactLabel: 'قول أهلًا',
         contactHeading: 'التواصل',
         contactText: 'عندك مشروع أو فكرة تستاهل تتبني؟ ابعتهالي ونكلم بعض.',
-        contactLabels: { email: 'الإيميل', call: 'اتصال', whatsapp: 'واتساب', linkedin: 'لينكدإن', facebook: 'فيسبوك' },
+        contactLabels: { email: 'الإيميل', call: 'اتصال', whatsapp: 'واتساب', linkedin: 'لينكدإن', facebook: 'فيسبوك', github: 'جيت هاب' },
         whatsappCta: 'ابعتلي رسالة',
         copyGithub: 'انسخ لينك GitHub',
         contactGithub: 'حساب GitHub',
@@ -214,7 +214,7 @@ function StickerBubble({ s, lang }: { s: Sticker; lang: Lang }) {
 }
 
 // Small contact icons, colored from the site's palette.
-function ContactIcon({ kind }: { kind: 'email' | 'call' | 'whatsapp' | 'linkedin' | 'facebook' }) {
+function ContactIcon({ kind }: { kind: 'email' | 'call' | 'whatsapp' | 'linkedin' | 'facebook' | 'github' }) {
     const common = { width: 20, height: 20, viewBox: '0 0 24 24', 'aria-hidden': true as const, focusable: false as const };
     switch (kind) {
         case 'email':
@@ -235,6 +235,10 @@ function ContactIcon({ kind }: { kind: 'email' | 'call' | 'whatsapp' | 'linkedin
             return <svg {...common}>
                 <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.8" />
                 <text x="12" y="16.8" textAnchor="middle" fontSize="11" fontWeight="800" fontFamily="inherit" fill="currentColor">f</text>
+            </svg>;
+        case 'github':
+            return <svg {...common}>
+                <path fill="currentColor" d="M12 2.6a9.4 9.4 0 0 0-2.97 18.33c.47.09.64-.2.64-.45v-1.72c-2.62.57-3.17-1.11-3.17-1.11-.43-1.08-1.04-1.37-1.04-1.37-.85-.58.06-.57.06-.57.94.07 1.44.97 1.44.97.84 1.43 2.2 1.02 2.73.78.09-.61.33-1.02.59-1.26-2.09-.24-4.29-1.04-4.29-4.65 0-1.03.37-1.87.97-2.53-.1-.24-.42-1.19.09-2.49 0 0 .79-.25 2.6.97a9.1 9.1 0 0 1 4.72 0c1.8-1.22 2.6-.97 2.6-.97.5 1.3.18 2.25.09 2.49.6.66.97 1.5.97 2.53 0 3.62-2.21 4.41-4.31 4.64.34.29.64.87.64 1.75v2.6c0 .25.17.55.65.45A9.4 9.4 0 0 0 12 2.6z" />
             </svg>;
     }
 }
@@ -307,7 +311,6 @@ export function App() {
 
     const visible = projects.filter(p => filter === 'all' || p.category === filter);
     const openProject = openId == null ? undefined : projects.find(p => p.id === openId);
-    const githubUrl = 'https://github.com/PolaBahaa';
     useEffect(() => {
         if (openId != null && !projects.some(project => project.id === openId)) {
             dialogRef.current?.close();
@@ -319,12 +322,13 @@ export function App() {
     const presentCategories = (['platform', 'app', 'learning'] as Category[]).filter(c => projects.some(p => p.category === c));
     const domainCount = new Set(projects.map(p => p.category)).size;
 
-    const contactRows: { kind: 'email' | 'call' | 'whatsapp' | 'linkedin' | 'facebook'; href: string; strong: string; strongDir?: 'ltr' }[] = [
+    const contactRows: { kind: 'email' | 'call' | 'whatsapp' | 'linkedin' | 'facebook' | 'github'; href: string; strong: string; strongDir?: 'ltr' }[] = [
         { kind: 'email', href: 'mailto:pola.bahaa753@gmail.com', strong: 'pola.bahaa753@gmail.com', strongDir: 'ltr' },
         { kind: 'call', href: 'tel:+201284978352', strong: '+20 128 497 8352', strongDir: 'ltr' },
         { kind: 'whatsapp', href: 'https://wa.me/201284978352?text=Hi+Pola%21', strong: t.whatsappCta },
         { kind: 'linkedin', href: 'https://www.linkedin.com/in/pola-bahaa/', strong: 'Pola Bahaa' },
         { kind: 'facebook', href: 'https://www.facebook.com/pola.vision/', strong: 'Pola ViSi0N' },
+        { kind: 'github', href: 'https://github.com/PolaBahaa', strong: 'PolaBahaa', strongDir: 'ltr' },
     ];
 
     return <div id="pb-top" className="pb-root">
@@ -464,10 +468,6 @@ export function App() {
                                 <span className="pb-contact-arrow" aria-hidden="true">↗</span>
                             </a>
                         )}
-                    </div>
-                    <div className="pb-contact-actions">
-                        <ButtonLink href={githubUrl} variant="primary" pill>{t.contactGithub}</ButtonLink>
-                        <CopyButton text={githubUrl} label={t.copyGithub} variant="secondary" />
                     </div>
                 </div>
             </section>
