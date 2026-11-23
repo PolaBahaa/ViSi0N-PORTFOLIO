@@ -99,14 +99,13 @@ const STR = {
             { year: 'Early days', text: 'Started programming as a kid and never stopped. Years across different technologies and operating systems built a deep technical base.' },
             { year: '2019', text: 'The start of intensive, structured programming study.' },
             { year: 'Along the way', text: 'More than 6 Python certificates and more than 11 intensive frontend and JavaScript courses from different providers, a Full-Stack .NET certificate from ITI (Information Technology Institute) through its annual student training, and a Full-Stack JavaScript certificate from EgyptFWD with Udacity.' },
-            { year: '2024', text: 'Foundations: four complete HTML & CSS website templates from ElZero Web School (Leon, Kasper, ViSi0N, Dashboard), plus a full set of CSS assignments.' },
+            { year: '2024', text: 'Foundations: four complete HTML & CSS website templates from ElZero Web School (Leon, Kasper, ViSi0N, Dashboard), with more than 2000 problems solved.' },
             { year: '2026', text: 'Full apps in React and TypeScript: an interactive podcast, a real-time 3D museum and a competitions app that runs live events.' },
             { year: 'Today', text: 'Going deeper into full-stack: modern JavaScript frameworks up front, with C#/.NET and Node.js behind them.' },
         ],
         skillsLabel: 'The toolbox',
         skillsHeading: 'Skills',
         skillsChip: (n: number) => `${n} tools ✳`,
-        skillsNote: 'Beyond the browser too: mobile apps with Flutter, desktop apps with Electron, and installable progressive web apps (PWA).',
         contactLabel: 'Say hello',
         contactHeading: 'Contact',
         contactText: 'Have a project or an idea worth building? Send it over and we can talk.',
@@ -121,8 +120,8 @@ const STR = {
         brandRole: 'مطوّر Full-Stack',
         eyebrow: '"If you want to test a man\'s character, give him power" - Lincoln',
         roles: ['مطوّر ويب Full-Stack', 'بشتغل بـ JavaScript وC#', 'React · .NET · Node.js', 'Flutter · Electron · PWA', 'ببرمج من وأنا طفل'],
-        introA: 'البرمجة مش مجرد شغل، دي دنيتي من وأنا طفل. قعدت أتعلّم وأجرّب تكنولوجيا وأنظمة مختلفة سنة ورا سنة، لحد ما الفضول بقى حرفة بجد.',
-        introB: 'دلوقتي بصمّم وببني منتجات ويب Full-Stack من الأول للآخر: واجهات React سريعة وشكلها يفتح النفس، وباك إند بـ .NET وNode.js، بـ JavaScript وC#. من أول فكرة لحد ما المشروع يبقى لايف.',
+        introA: 'البرمجة مش مجرد شغل، دي دنيتي من وأنا طفل. قعدت أتعلّم وأجرّب تكنولوجيا وأنظمة مختلفة سنة ورا سنة، لحد ما الفضول بقا حرفة.',
+        introB: 'دلوقتي بصمّم وببني منتجات ويب Full-Stack من الأول للآخر: واجهات React سريعة، وباك إند بـ .NET وNode.js، بـ JavaScript وC#. من أول فكرة لحد ما المشروع يبقى لايف.',
         getInTouch: 'يلا نبدأ مشروعك',
         stats: { repos: 'مستودع عام على GitHub', domains: 'مجال للمشاريع', tech: 'تقنية شغال بيها' },
         projectsLabel: 'أعمال مختارة',
@@ -142,17 +141,16 @@ const STR = {
             { year: 'البداية', text: 'بدأت أبرمج وأنا طفل ومكمّل من ساعتها. سنين مع تكنولوجيا وأنظمة تشغيل مختلفة بنتلي قاعدة تقنية قوية.' },
             { year: '2019', text: 'بداية الدراسة والتدريب المكثّف المنظّم في البرمجة.' },
             { year: 'على مدار الرحلة', text: 'أكتر من 6 شهادات في Python، وأكتر من 11 كورس مكثّف في الفرونت إند وJavaScript من جهات مختلفة، وشهادة Full-Stack .NET من ITI (معهد تكنولوجيا المعلومات) من خلال تدريبه السنوي للطلاب، وشهادة Full-Stack بـ JavaScript من EgyptFWD وUdacity.' },
-            { year: '2024', text: 'الأساس: أربع قوالب مواقع كاملة بـ HTML وCSS من ElZero Web School (Leon وKasper وViSi0N وDashboard)، مع مجموعة تكليفات CSS كاملة.' },
+            { year: '2024', text: 'الأساس: أربع قوالب مواقع كاملة بـ HTML وCSS من ElZero Web School (Leon وKasper وViSi0N وDashboard)، مع حل اكتر من 2000 مشكلة.' },
             { year: '2026', text: 'تطبيقات كاملة بـ React وTypeScript: بودكاست تفاعلي، ومتحف 3D بيترسم لحظيًا، وتطبيق مسابقات بيشتغل في الفعاليات الحقيقية.' },
             { year: 'دلوقتي', text: 'بتعمّق أكتر في الـ Full-Stack: frameworks حديثة للواجهة، وC#/.NET وNode.js في الباك إند.' },
         ],
         skillsLabel: 'صندوق الأدوات',
         skillsHeading: 'المهارات',
         skillsChip: (n: number) => `${n} أداة ✳`,
-        skillsNote: 'ومش بس ويب: بعرف أطوّر تطبيقات موبايل بـ Flutter، وتطبيقات ديسكتوب بـ Electron، وتطبيقات ويب تتثبت على الجهاز بـ PWA.',
-        contactLabel: 'قول أهلًا',
+        contactLabel: 'أرمي السلام',
         contactHeading: 'التواصل',
-        contactText: 'عندك مشروع أو فكرة تستاهل تتبني؟ ابعتهالي ونكلم بعض.',
+        contactText: 'عندك فكرة مشروع جديد؟ سوا هتطلع للنور.',
         contactLabels: { email: 'الإيميل', call: 'اتصال', whatsapp: 'واتساب', linkedin: 'لينكدإن', facebook: 'فيسبوك', github: 'جيت هاب' },
         whatsappCta: 'ابعتلي رسالة',
         copyGithub: 'انسخ لينك GitHub',
@@ -352,7 +350,7 @@ export function App() {
                 </nav>
                 {saved.message ? <Caption>{saved.message}</Caption> : null}
 
-                <p className="pb-eyebrow" dir="auto">{t.eyebrow}</p>
+                <p className="pb-eyebrow" dir="ltr">{t.eyebrow}</p>
                 <h1 className="pb-hero-title">POLA BAHAA</h1>
                 <div className="pb-hero-role"><Rotator words={t.roles} /></div>
 
@@ -386,7 +384,7 @@ export function App() {
                     </div>
                     <SectionChip tone="yellow" tilt="5deg">{t.projectsChip(projects.length)}</SectionChip>
                 </div>
-                <p className="pb-intro pb-reveal">{t.projectsIntro}</p>
+                <p className="pb-intro pb-projects-intro pb-reveal">{t.projectsIntro}</p>
                 <div className="pb-sync" role="status">
                     <span className={`pb-sync-dot pb-sync-${syncState}`} aria-hidden="true" />
                     <span>{lang === 'ar'
@@ -451,7 +449,6 @@ export function App() {
                 <div className="pb-skills pb-reveal">
                     {skills.map(s => <button key={s} type="button" className={`pb-skill${activeSkill === s ? ' is-active' : ''}`} aria-pressed={activeSkill === s} onClick={() => pickSkill(s)}>{s}</button>)}
                 </div>
-                <p className="pb-intro pb-reveal">{t.skillsNote}</p>
             </section>
 
             <section className="pb-section pb-contact-block" id="pb-contact">

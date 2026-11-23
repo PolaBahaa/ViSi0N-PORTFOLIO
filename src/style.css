@@ -72,13 +72,14 @@ body { background: var(--pb-black); }
     .pb-brand { order: 1; }
     .pb-lang { order: 2; margin-inline-start: auto; }
     .pb-lang button { padding: 0 11px; min-height: 30px; font-size: 12px; }
-    .pb-nav-links { order: 3; flex-basis: 100%; }
+    .pb-nav-links { order: 3; flex: 1 0 100%; justify-content: center; gap: 2px clamp(0px, 1vw, 6px); }
+    .pb-nav-link { padding-inline: clamp(7px, 2vw, 12px); }
 }
 
 .pb-hero [class*="caption"] { color: rgba(238,229,224,0.45); font-size: 11.5px; }
 
 .pb-eyebrow { margin: 14px 0 0; font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(238,229,224,0.42); animation: pb-rise 0.5s ease both; }
-[dir="rtl"] .pb-eyebrow { letter-spacing: 0.06em; }
+[dir="rtl"] .pb-eyebrow { letter-spacing: 0.06em; text-align: right; }
 @media (max-width: 420px) { .pb-eyebrow { letter-spacing: 0.08em; font-size: 9.5px; margin-top: 10px; } }
 .pb-hero-title { font-family: var(--pb-display); font-size: clamp(38px, 12vw, 130px); line-height: 0.98; margin: 14px 0 0; letter-spacing: 0.005em; text-transform: uppercase; color: var(--pb-cream); white-space: nowrap; animation: pb-rise 0.55s ease both; animation-delay: 0.05s; }
 .pb-hero-role { margin-top: 10px; font-size: clamp(15px, 3.4vw, 21px); font-weight: 600; color: var(--pb-cream); min-height: 1.5em; overflow: hidden; padding-bottom: 4px; }
@@ -352,3 +353,7 @@ body { background: var(--pb-black); }
 .pb-brand-logo { width: 40px; height: 35px; object-fit: contain; flex-shrink: 0; align-self: center; }
 .pb-footer-logo { width: 38px; height: 33px; object-fit: contain; flex-shrink: 0; }
 .file-closing { display: flex; align-items: center; justify-content: center; gap: 14px; line-height: 1.7; text-align: center; }
+
+/* Let the project introduction use the full section width. Keep small screens readable. */
+.pb-projects-intro { max-width: none; text-wrap: pretty; }
+@media (min-width: 768px) { .pb-projects-intro { white-space: nowrap; font-size: clamp(12px, 1.5vw, 14.5px); } }
