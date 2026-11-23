@@ -148,7 +148,7 @@ const STR = {
         skillsLabel: 'صندوق الأدوات',
         skillsHeading: 'المهارات',
         skillsChip: (n: number) => `${n} أداة ✳`,
-        contactLabel: 'أرمي السلام',
+        contactLabel: 'مية مسا',
         contactHeading: 'التواصل',
         contactText: 'عندك فكرة مشروع جديد؟ سوا هتطلع للنور.',
         contactLabels: { email: 'الإيميل', call: 'اتصال', whatsapp: 'واتساب', linkedin: 'لينكدإن', facebook: 'فيسبوك', github: 'جيت هاب' },
@@ -350,6 +350,7 @@ export function App() {
                 </nav>
                 {saved.message ? <Caption>{saved.message}</Caption> : null}
 
+                <div className="pb-hero-content">
                 <p className="pb-eyebrow" dir="ltr">{t.eyebrow}</p>
                 <h1 className="pb-hero-title">POLA BAHAA</h1>
                 <div className="pb-hero-role"><Rotator words={t.roles} /></div>
@@ -358,6 +359,8 @@ export function App() {
                     <p className="pb-hero-para">{t.introA}</p>
                     <p className="pb-hero-para">{t.introB}</p>
                     <button type="button" className="pb-touch" onClick={() => scrollToId('pb-contact')}><span className="file-hover-underline">{t.getInTouch}</span> <span className="pb-touch-arrow" aria-hidden="true">→</span></button>
+                </div>
+
                 </div>
 
                 <div className="pb-gridfield">
